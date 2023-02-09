@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import axios from 'axios';
 import config from '@/utils/config';
 import { signToken } from '@/utils/auth';
+import client from '@/utils/client';
 
 const handler = nc();
 
@@ -23,6 +24,15 @@ handler.post(async (req, res) => {
 		},
 	];
 
+	const existingUser = await client.fetch(
+		`*[_type == "user" && email == $email][0]`,
+		{
+			email: req.body.email,
+		}
+	);
+	if (existingUser) {
+		return res.status(401).send({ message: 'Email already exists' });
+	}
 	const { data } = await axios.post(
 		`https://${projectId}.api.sanity.io/v1/data/mutate/${dataset}?returnIds=true`,
 		{ mutations: createMutations },

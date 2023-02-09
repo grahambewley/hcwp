@@ -25,6 +25,9 @@ const classes = {
 		fontWeight: 'bold',
 		fontSize: '1.5rem',
 	},
+	navbarButton: {
+		textTransform: 'initial',
+	},
 };
 
 export default classes;
