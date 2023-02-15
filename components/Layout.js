@@ -158,9 +158,7 @@ export default function Layout({ title, description, children }) {
 						</Box>
 					</Toolbar>
 				</AppBar>
-				<Container component="main" sx={classes.main}>
-					{children}
-				</Container>
+				<main>{children}</main>
 				<Box component="footer" sx={classes.footer}>
 					<Typography>
 						All rights reserved. Have Camera Will Pedal.
