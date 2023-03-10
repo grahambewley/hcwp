@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import client from '@/utils/client';
 import { urlFor, urlForThumbnail } from '@/utils/image';
-import { Container, H1, H3 } from '@/utils/sharedStyles';
+import { Container, H1, H3, P } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 
 const WhiteSection = styled.div`
     background-color: white;
     padding: 2rem 0;
+    margin-top: 4rem;
 `;
 
 const AssetGrid = styled.div`
@@ -64,7 +65,7 @@ export default function ProductScreen({ slug }) {
     const renderAssetGrid = () => {
         return (
             <AssetGrid>
-                {assets.map(asset => (
+                {assets?.map(asset => (
                     <AssetGridItem key={asset._id}>
                         <AssetImage src={urlForThumbnail(asset.image)} />
                     </AssetGridItem>
@@ -77,6 +78,7 @@ export default function ProductScreen({ slug }) {
 		<Layout title={collection?.name}>
 			<Container>
                 <H1>{collection?.name}</H1>
+                <P>{collection?.description}</P>
             </Container>
             <WhiteSection>
                 <Container>

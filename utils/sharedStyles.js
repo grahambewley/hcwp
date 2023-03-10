@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { Orelega_One, Montserrat, Permanent_Marker } from '@next/font/google';
+import { Orelega_One, Montserrat, Permanent_Marker, Inter } from '@next/font/google';
 
 const montserrat = Montserrat({ weight: '400', subsets: ['latin'] });
 const orelegaOne = Orelega_One({ weight: '400', subsets: ['latin'] });
+const inter = Inter({ weight: '400', subsets: ['latin'] });
 
 const H1 = styled.h1`
 	font-size: 2.4rem;
@@ -15,6 +16,9 @@ const H3 = styled.h3`
 const H4 = styled.h4`
 	font-size: 1rem;
 	font-family: ${montserrat.style.fontFamily};
+`;
+const P = styled.p`
+	font-family: ${inter.style.fontFamily};
 `;
 
 const Container = styled.div`
@@ -49,6 +53,7 @@ export {
 	H1, 
 	H3, 
 	H4,
+	P,
 	Container,
 	Button
 };

@@ -7,7 +7,7 @@ import { H4 } from '@/utils/sharedStyles';
 const GridWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: 2rem;
 `;
 
 const GridItem = styled.div`

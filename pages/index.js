@@ -51,7 +51,7 @@ export default function Home() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const query = `*[_type == "collection"]`;
+				const query = `*[_type == "collection"][0..2] | order(date desc)`;
 				client.fetch(query).then((collections) => {
 					console.log("collections: ", collections);
 					setLatestCollections(collections);
