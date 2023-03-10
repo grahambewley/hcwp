@@ -17,38 +17,6 @@ const H4 = styled.h4`
 	font-family: ${montserrat.style.fontFamily};
 `;
 
-const Banner = styled.div`
-	height: 100vh;
-	width: 100%;
-	position: relative;
-	display: flex;
-	align-items: center;
-	margin-bottom: 4rem;
-
-	&::before {
-		content: '';
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		background-image: url('/default_bg.jpg');
-		filter: sepia(80%);
-		background-size: cover;
-		background-position: center;
-		opacity: 0.15;
-		z-index: -1;
-	}
-`;
-
-const BannerHeadline = styled.h1`
-	font-size: 4rem;
-	font-family: ${orelegaOne.style.fontFamily};
-`;
-
-const BannerSubhead = styled.h2`
-	font-size: 2rem;
-	font-family: ${montserrat.style.fontFamily};
-`;
-
 const Container = styled.div`
 	width: 100%;
 	max-width: 1200px;
@@ -56,6 +24,31 @@ const Container = styled.div`
 	padding: 0 32px;
 `;
 
+const Button = styled.button`
+	display: inline-block;
+	border: 2px solid black;
+	padding: 1rem 2rem;
+	margin: 0;
+	text-decoration: none;
+	background: none;
+	font-family: ${montserrat.style.fontFamily};
+	font-size: 1rem;
+	cursor: pointer;
+	text-align: center;
+	transition: background 250ms ease-in-out, 
+				transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+
+	&:hover {
+		border: 2px solid grey;
+	}
+`;
+
 export { 
-	H1, H3, H4,
-	Banner, BannerHeadline, Container };
+	H1, 
+	H3, 
+	H4,
+	Container,
+	Button
+};
