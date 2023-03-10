@@ -1,31 +1,34 @@
 import { useContext, useEffect, useState } from 'react';
-import { useSnackbar } from 'notistack';
-import client from '../../utils/client';
-import classes from '../../utils/classes';
+import client from '@/utils/client';
 import { urlFor, urlForThumbnail } from '@/utils/image';
+import { Container, H1, H3 } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
-import {
-	Alert,
-	Button,
-	Card,
-	CircularProgress,
-	Grid,
-	Link,
-	List,
-	ListItem,
-	Typography,
-} from '@mui/material';
-import { Box } from '@mui/system';
-import NextLink from 'next/link';
-import Image from 'next/image';
-import { Store } from '@/utils/store';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+const WhiteSection = styled.div`
+    background-color: white;
+    padding: 2rem 0;
+`;
+
+const AssetGrid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+`;
+
+const AssetGridItem = styled.div`
+    aspect-ratio: 1;
+`;
+
+const AssetImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`;
 
 export default function ProductScreen({ slug }) {
 	const [collection, setCollection] = useState();
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState('');
+	const [assets, setAssets] = useState();
 
 	useEffect(() => {
 		const fetchCollection = async () => {
@@ -40,12 +43,47 @@ export default function ProductScreen({ slug }) {
 				console.log(err);
 			}
 		};
+
+        const fetchAssets = async () => {
+            try {
+                const assets = await client.fetch(
+                    `*[_type == "asset" && collection->slug.current == $slug]`,
+                    { slug }
+                )
+                setAssets(assets);
+                console.log("assets: ", assets);
+            } catch(err) {
+                console.log(err);
+            }
+        }
 		fetchCollection();
+        fetchAssets();
 	}, [slug]);
+
+
+    const renderAssetGrid = () => {
+        return (
+            <AssetGrid>
+                {assets.map(asset => (
+                    <AssetGridItem key={asset._id}>
+                        <AssetImage src={urlForThumbnail(asset.image)} />
+                    </AssetGridItem>
+                ))}
+            </AssetGrid>
+        )
+    }
 
 	return (
 		<Layout title={collection?.name}>
-			<div>Hello world</div>
+			<Container>
+                <H1>{collection?.name}</H1>
+            </Container>
+            <WhiteSection>
+                <Container>
+                    {renderAssetGrid()}
+                </Container>
+            </WhiteSection>
+            
 		</Layout>
 	);
 }

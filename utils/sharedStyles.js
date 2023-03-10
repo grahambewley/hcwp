@@ -4,7 +4,11 @@ import { Orelega_One, Montserrat, Permanent_Marker } from '@next/font/google';
 const montserrat = Montserrat({ weight: '400', subsets: ['latin'] });
 const orelegaOne = Orelega_One({ weight: '400', subsets: ['latin'] });
 
-const H3 = styled.h1`
+const H1 = styled.h1`
+	font-size: 2.4rem;
+	font-family: ${orelegaOne.style.fontFamily};
+`;
+const H3 = styled.h3`
 	font-size: 1.4rem;
 	font-family: ${montserrat.style.fontFamily};
 `;
@@ -14,7 +18,7 @@ const H4 = styled.h4`
 `;
 
 const Banner = styled.div`
-	height: 85vh;
+	height: 100vh;
 	width: 100%;
 	position: relative;
 	display: flex;
@@ -53,5 +57,5 @@ const Container = styled.div`
 `;
 
 export { 
-	H3, H4,
+	H1, H3, H4,
 	Banner, BannerHeadline, Container };
