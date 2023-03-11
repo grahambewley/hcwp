@@ -9,6 +9,7 @@ export default {
       type: 'image',
       options: {
         hotspot: true,
+        storeOriginalFilename: true,
         metadata: [
           'exif',
         ],

@@ -4,6 +4,7 @@ import { urlFor, urlForThumbnail } from '@/utils/image';
 import { Container, H1, H3, P, Button } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
+import NextLink from 'next/link';
 
 const WhiteSection = styled.div`
     background-color: white;
@@ -39,7 +40,6 @@ export default function ProductScreen({ slug }) {
 					{ slug }
 				);
                 setCollection(collection);
-				console.log("collection: ", collection);
 			} catch (err) {
 				console.log(err);
 			}
@@ -52,7 +52,6 @@ export default function ProductScreen({ slug }) {
                     { slug }
                 )
                 setAssets(assets);
-                console.log("assets: ", assets);
             } catch(err) {
                 console.log(err);
             }
@@ -66,17 +65,13 @@ export default function ProductScreen({ slug }) {
             <AssetGrid>
                 {assets?.map(asset => (
                     <AssetGridItem key={asset._id}>
-                        <AssetImage src={urlForThumbnail(asset.image)} />
+                        <NextLink href={`/image/${asset._id}`} passHref>
+                            <AssetImage src={urlForThumbnail(asset.image)} />
+                        </NextLink>
                     </AssetGridItem>
                 ))}
             </AssetGrid>
         )
-    }
-
-    const getAssetAvailability = async () => {
-        const response = await fetch("/api/checkFileAvailability?bucket=2022-10-marquette-fall-enduro&filename=1-DSC_0230.jpg");
-        const data = await response.json();
-        console.log("availability response: ", data.available);
     }
 
 	return (
@@ -84,15 +79,12 @@ export default function ProductScreen({ slug }) {
 			<Container>
                 <H1>{collection?.name}</H1>
                 <P>{collection?.description}</P>
-
-                <Button onClick={getAssetAvailability}>Do Thing</Button>
             </Container>
             <WhiteSection>
                 <Container>
                     {renderAssetGrid()}
                 </Container>
             </WhiteSection>
-            
 		</Layout>
 	);
 }
