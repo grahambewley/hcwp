@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import client from '@/utils/client';
 import { urlFor, urlForThumbnail } from '@/utils/image';
-import { Container, H1, H3, P } from '@/utils/sharedStyles';
+import { Container, H1, H3, P, Button } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 
@@ -61,7 +61,6 @@ export default function ProductScreen({ slug }) {
         fetchAssets();
 	}, [slug]);
 
-
     const renderAssetGrid = () => {
         return (
             <AssetGrid>
@@ -74,11 +73,19 @@ export default function ProductScreen({ slug }) {
         )
     }
 
+    const getAssetAvailability = async () => {
+        const response = await fetch("/api/checkFileAvailability?bucket=2022-10-marquette-fall-enduro&filename=1-DSC_0230.jpg");
+        const data = await response.json();
+        console.log("availability response: ", data.available);
+    }
+
 	return (
 		<Layout title={collection?.name}>
 			<Container>
                 <H1>{collection?.name}</H1>
                 <P>{collection?.description}</P>
+
+                <Button onClick={getAssetAvailability}>Do Thing</Button>
             </Container>
             <WhiteSection>
                 <Container>
