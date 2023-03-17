@@ -33,7 +33,11 @@ export default async function handler(req, res) {
         // 2. Handle event type (add business logic here)
         if(event.type === 'checkout.session.completed') {
             console.log('💰 Payment received');
-            // TODO 
+            // TODO
+            // 1. Get metadata from checkout event
+            // 2. Generate AWS pre-signed URL for image download
+            // 3. Construct email to send to customer
+            // 4. Send email via nodemailer
         }
     } else {
         res.setHeader('Allow', 'POST');
