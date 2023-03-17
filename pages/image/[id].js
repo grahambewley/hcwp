@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import client from '@/utils/client';
 import { urlFor, urlForThumbnail } from '@/utils/image';
-import { Container, H1, H3, P, Button } from '@/utils/sharedStyles';
+import { Container, H2, P } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import NextLink from 'next/link';
@@ -15,27 +15,31 @@ const GridWrapper = styled.div`
 
 const Image = styled.img`
     width: 100%;
-
 `;
 
 export default function ImageDetailPage({ id }) {
 	const [asset, setAsset] = useState();
 
+    useEffect(() => {
+        console.log("here we are")
+    }, []);
+
 	useEffect(() => {
         const fetchAsset = async () => {
 			try {
 				client.fetch(
-					`*[_type == "asset" && _id == $id][0]`,
+					`*[_type == "asset" && _id == $id]{
+                        image,
+                        filename,
+                        collection->
+                    }
+                    [0]`,
 					{ id }
 				).then(asset => {
                     setAsset(asset);
-				    console.log("asset: ", asset);
-                    // TODO: 
-                    // Here I thought I'd be able to get the original filename and use that
-                    // but it seems that's not working.
-                    // Need to add a new field to the Asset schema (name) and have this match 
-                    // the filename in S3.
-                    // Eventually this will be automated with the JSON upload thing.
+                    const bucket = asset.collection.slug.current;
+                    const filename = asset.filename;
+                    getAssetAvailability(bucket, filename);
                 });
                 
 			} catch (err) {
@@ -44,6 +48,7 @@ export default function ImageDetailPage({ id }) {
 		};
         fetchAsset();
 	}, [id]);
+
 
     const getAssetAvailability = async (bucket, filename) => {
         const response = await fetch(`/api/checkFileAvailability?bucket=${bucket}&filename=${filename}`);
@@ -54,9 +59,18 @@ export default function ImageDetailPage({ id }) {
 	return (
 		<Layout title={"Image Detail"}>
 			<Container>
-                <GridWrapper>
-                    <Image src={urlFor(asset?.image)}/>
-                </GridWrapper>
+                {asset ? 
+                    <GridWrapper>
+                        <Image src={urlFor(asset.image)}/>
+                        <div>
+                            <H2>Purchase High Quality Photo</H2>
+                            <P>Full resolution photos are available for instant download with purchase.<br/><br/>All photos are captured by Graham Bewley, a fellow cyclist and photographer. Happy trails! ✌</P>
+
+                            <P>{asset.filename}</P>
+                        </div>
+                    </GridWrapper>
+                : null}
+                
             </Container>
 		</Layout>
 	);

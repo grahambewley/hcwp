@@ -53,7 +53,6 @@ export default function Home() {
 			try {
 				const query = `*[_type == "collection"][0..2] | order(date desc)`;
 				client.fetch(query).then((collections) => {
-					console.log("collections: ", collections);
 					setLatestCollections(collections);
 				});
 			} catch (err) {

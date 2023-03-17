@@ -8,6 +8,5 @@ const client = sanityClient({
 	useCdn: true,
 });
 
-console.log('client: ', client);
 
 export default client;

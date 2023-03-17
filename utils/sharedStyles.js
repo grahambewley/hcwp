@@ -9,6 +9,10 @@ const H1 = styled.h1`
 	font-size: 2.4rem;
 	font-family: ${orelegaOne.style.fontFamily};
 `;
+const H2 = styled.h2`
+	font-size: 2rem;
+	font-family: ${orelegaOne.style.fontFamily};
+`;
 const H3 = styled.h3`
 	font-size: 1.4rem;
 	font-family: ${montserrat.style.fontFamily};
@@ -51,6 +55,7 @@ const Button = styled.button`
 
 export { 
 	H1, 
+	H2,
 	H3, 
 	H4,
 	P,
