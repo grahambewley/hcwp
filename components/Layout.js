@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { Store } from '@/utils/store';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Container } from '@/utils/sharedStyles';
