@@ -23,7 +23,6 @@ const NavLink = styled.a`
 
 export default function Layout({ title, description, children }) {
 	const router = useRouter();
-	const { state, dispatch } = useContext(Store);	
 	return (
 		<>
 			<Head>
