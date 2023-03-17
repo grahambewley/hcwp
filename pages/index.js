@@ -11,7 +11,7 @@ const montserrat = Montserrat({ weight: '400', subsets: ['latin'] });
 const orelegaOne = Orelega_One({ weight: '400', subsets: ['latin'] });
 
 const Banner = styled.div`
-	height: 90vh;
+	height: 60vh;
 	width: 100%;
 	position: relative;
 	display: flex;

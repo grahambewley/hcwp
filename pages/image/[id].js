@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import client from '@/utils/client';
 import { urlFor, urlForThumbnail } from '@/utils/image';
-import { Container, H2, P } from '@/utils/sharedStyles';
+import { Container, H2, P, Button } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import NextLink from 'next/link';
-import {BuyNowButton} from '@ecwid/nextjs-ecwid-plugin';
+import getStripe from '@/utils/getStripe';
+import axios from 'axios';
 
 const GridWrapper = styled.div`
     margin-top: 4rem;
@@ -18,12 +19,30 @@ const Image = styled.img`
     width: 100%;
 `;
 
+const PRODUCT_PRICE_ID = "price_1MmenNCrOdBquP9Projo19TQ";
+
+const redirectToCheckout = async () => {
+    // Create Stripe checkout
+    const {
+        data: {id}
+    } = await axios.post('/api/checkout_sessions', {
+        items: [
+            {
+                price: PRODUCT_PRICE_ID,
+                quantity: 1
+            }
+        ]
+    });
+
+    console.log("got checkout ID: ", id);
+    // Redirect to checkout
+    const stripe = await getStripe();
+    await stripe.redirectToCheckout({sessionId: id});
+}
+
 export default function ImageDetailPage({ id }) {
 	const [asset, setAsset] = useState();
-
-    useEffect(() => {
-        console.log("here we are")
-    }, []);
+    const [assetAvailable, setAssetAvailable] = useState(false);
 
 	useEffect(() => {
         const fetchAsset = async () => {
@@ -55,6 +74,7 @@ export default function ImageDetailPage({ id }) {
         const response = await fetch(`/api/checkFileAvailability?bucket=${bucket}&filename=${filename}`);
         const data = await response.json();
         console.log("availability response: ", data.available);
+        setAssetAvailable(data.available);
     }
 
 	return (
@@ -67,11 +87,9 @@ export default function ImageDetailPage({ id }) {
                             <H2>Purchase High Quality Photo</H2>
                             <P>Full resolution photos are available for instant download with purchase.<br/><br/>All photos are captured by Graham Bewley, a fellow cyclist and photographer. Happy trails! ✌</P>
 
-                            <BuyNowButton
-                                storeId="84349616"
-                                productId="537476671"
-                                isShowPrice={false}
-                            />
+                            {assetAvailable ? 
+                                <Button onClick={redirectToCheckout}>Purchase Full-Resolution</Button>
+                            : null}
                         </div>
                     </GridWrapper>
                 : null}
