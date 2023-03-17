@@ -5,11 +5,11 @@ import { Container, H1, H3, P, Button } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import NextLink from 'next/link';
+import ShortBanner from '../../components/ShortBanner';
 
 const WhiteSection = styled.div`
     background-color: white;
     padding: 2rem 0;
-    margin-top: 4rem;
 `;
 
 const AssetGrid = styled.div`
@@ -76,10 +76,7 @@ export default function ProductScreen({ slug }) {
 
 	return (
 		<Layout title={collection?.name}>
-			<Container>
-                <H1>{collection?.name}</H1>
-                <P>{collection?.description}</P>
-            </Container>
+			<ShortBanner title={collection?.name} subtitle={collection?.description}/>
             <WhiteSection>
                 <Container>
                     {renderAssetGrid()}

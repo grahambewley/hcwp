@@ -39,13 +39,13 @@ const BannerSubhead = styled.h2`
 	margin-bottom: 2rem;
 `;
 
-export default function ShortBanner({title}) {
+export default function ShortBanner({title, subtitle}) {
 
     return (
         <Banner>
             <Container>
                 <BannerHeadline>{title}</BannerHeadline>
-                {/* <BannerSubhead>Trail photography by Graham Bewley</BannerSubhead> */}
+                {subtitle ? <BannerSubhead>{subtitle}</BannerSubhead> : null}
             </Container>
         </Banner>
     )

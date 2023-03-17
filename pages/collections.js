@@ -25,12 +25,13 @@ export default function Collections() {
 
 	return (
 		<Layout>
-			<ShortBanner title="Collections"/>
-
+			<ShortBanner 
+                title="Collections"
+                subtitle="Discover photos organized by events or collections."
+            />
 			<Container>
 				<CollectionsGrid collections={collections}/>
 			</Container>
-			
 		</Layout>
 	);
 }
