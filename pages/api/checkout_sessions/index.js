@@ -8,8 +8,14 @@ export default async function handler(req, res) {
             const session = await stripe.checkout.sessions.create({
                 line_items: req?.body?.items ?? [],
                 metadata: {
-                    image_bucket: req?.body?.imageBucket ?? '',
-                    image_filename: req?.body?.imageFilename ?? ''
+                    'image_bucket': req?.body?.imageBucket ?? '',
+                    'image_filename': req?.body?.imageFilename ?? ''
+                },
+                payment_intent_data: {
+                    'metadata': {
+                        'image_bucket': req?.body?.imageBucket ?? '',
+                        'image_filename': req?.body?.imageFilename ?? ''
+                    }
                 },
                 mode: 'payment',
                 payment_method_types: ['card'],
