@@ -1,25 +1,26 @@
 import styled from 'styled-components';
-import { Orelega_One, Montserrat, Permanent_Marker, Inter } from '@next/font/google';
+import { Carter_One, Inter_Tight, Inter } from '@next/font/google';
 
-const montserrat = Montserrat({ weight: '400', subsets: ['latin'] });
-const orelegaOne = Orelega_One({ weight: '400', subsets: ['latin'] });
-const inter = Inter({ weight: '400', subsets: ['latin'] });
+const carterOne = Carter_One({ weight: '400', subsets: ['latin'] });
+const interTight = Inter_Tight({ weight: '300', subsets: ['latin'] });
+const inter = Inter({ weight: ['400', '600'], subsets: ['latin'] });
 
 const H1 = styled.h1`
 	font-size: 2.4rem;
-	font-family: ${orelegaOne.style.fontFamily};
+	font-family: ${carterOne.style.fontFamily};
 `;
 const H2 = styled.h2`
 	font-size: 2rem;
-	font-family: ${orelegaOne.style.fontFamily};
+	font-family: ${carterOne.style.fontFamily};
 `;
 const H3 = styled.h3`
 	font-size: 1.4rem;
-	font-family: ${montserrat.style.fontFamily};
+	font-family: ${interTight.style.fontFamily};
+	margin-bottom: 1rem;
 `;
 const H4 = styled.h4`
 	font-size: 1rem;
-	font-family: ${montserrat.style.fontFamily};
+	font-family: ${interTight.style.fontFamily};
 `;
 const P = styled.p`
 	font-family: ${inter.style.fontFamily};
@@ -39,17 +40,22 @@ const Button = styled.button`
 	margin: 0;
 	text-decoration: none;
 	background: none;
-	font-family: ${montserrat.style.fontFamily};
+	font-family: ${inter.style.fontFamily};
+	font-weight: 600;
 	font-size: 1rem;
 	cursor: pointer;
 	text-align: center;
-	transition: background 250ms ease-in-out, 
-				transform 150ms ease;
+	transition: all .1s ease-out;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 
 	&:hover {
-		border: 2px solid grey;
+		transform: translateY(-2px);
+		box-shadow: 0px 2px 4px rgba(0,0,0,.4);
+	}
+	&:active {
+		transform: translateY(0);
+		box-shadow: none;
 	}
 `;
 

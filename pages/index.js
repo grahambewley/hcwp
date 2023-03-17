@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import { Button, Container, H3 } from '@/utils/sharedStyles';
 import client from '@/utils/client';
 import styled from 'styled-components';
-import { Orelega_One, Montserrat, Permanent_Marker } from '@next/font/google';
+import { Carter_One, Inter_Tight } from '@next/font/google';
 
-const montserrat = Montserrat({ weight: '400', subsets: ['latin'] });
-const orelegaOne = Orelega_One({ weight: '400', subsets: ['latin'] });
+const carterOne = Carter_One({ weight: '400', subsets: ['latin'] });
+const interTight = Inter_Tight({ weight: '200', subsets: ['latin'] });
 
 const Banner = styled.div`
 	height: 60vh;
@@ -34,12 +34,12 @@ const Banner = styled.div`
 
 const BannerHeadline = styled.h1`
 	font-size: 3.6rem;
-	font-family: ${orelegaOne.style.fontFamily};
+	font-family: ${carterOne.style.fontFamily};
 `;
 
 const BannerSubhead = styled.h2`
-	font-size: 1.6rem;
-	font-family: ${montserrat.style.fontFamily};
+	font-size: 1.4rem;
+	font-family: ${interTight.style.fontFamily};
 	margin-bottom: 2rem;
 `;
 
@@ -66,8 +66,8 @@ export default function Home() {
 		<Layout>
 			<Banner>
 				<Container>
-					<BannerHeadline>Have Camera Will Pedal</BannerHeadline>
-					<BannerSubhead>The home of trail photography by Graham Bewley</BannerSubhead>
+					<BannerHeadline>Have Camera, Will Pedal.</BannerHeadline>
+					<BannerSubhead>Trail photography by Graham Bewley</BannerSubhead>
 					<Button onClick={() => router.push('/collections')}>View All Collections</Button>
 				</Container>
 			</Banner>

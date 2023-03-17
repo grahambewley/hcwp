@@ -26,7 +26,6 @@ export default function CollectionsGrid({collections}) {
     return (
         <GridWrapper>
             {collections.map(coll => (
-                
                 <GridItem key={coll._id}>
 			        <NextLink href={`/collection/${coll.slug.current}`} passHref>
                         <CollectionImage src={urlForThumbnail(coll.image)}/>
