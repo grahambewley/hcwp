@@ -19,29 +19,12 @@ const Image = styled.img`
     width: 100%;
 `;
 
-const PRODUCT_PRICE_ID = "price_1MmenNCrOdBquP9Projo19TQ";
-
-const redirectToCheckout = async () => {
-    // Create Stripe checkout
-    const {
-        data: {id}
-    } = await axios.post('/api/checkout_sessions', {
-        items: [
-            {
-                price: PRODUCT_PRICE_ID,
-                quantity: 1
-            }
-        ]
-    });
-
-    console.log("got checkout ID: ", id);
-    // Redirect to checkout
-    const stripe = await getStripe();
-    await stripe.redirectToCheckout({sessionId: id});
-}
+const TEST_PRODUCT_PRICE_ID = "price_1MmenNCrOdBquP9Projo19TQ";
 
 export default function ImageDetailPage({ id }) {
 	const [asset, setAsset] = useState();
+    const [bucket, setBucket] = useState();
+    const [filename, setFilename] = useState();
     const [assetAvailable, setAssetAvailable] = useState(false);
 
 	useEffect(() => {
@@ -58,7 +41,9 @@ export default function ImageDetailPage({ id }) {
 				).then(asset => {
                     setAsset(asset);
                     const bucket = asset.collection.slug.current;
+                    setBucket(bucket);
                     const filename = asset.filename;
+                    setFilename(filename);
                     getAssetAvailability(bucket, filename);
                 });
                 
@@ -69,12 +54,35 @@ export default function ImageDetailPage({ id }) {
         fetchAsset();
 	}, [id]);
 
-
     const getAssetAvailability = async (bucket, filename) => {
         const response = await fetch(`/api/checkFileAvailability?bucket=${bucket}&filename=${filename}`);
         const data = await response.json();
         console.log("availability response: ", data.available);
         setAssetAvailable(data.available);
+    }
+
+    const redirectToCheckout = async () => {
+        // Must have image bucket and filename to proceed
+        if(!bucket || !filename) return;
+    
+        // Create Stripe checkout
+        const {
+            data: {id}
+        } = await axios.post('/api/checkout_sessions', {
+            items: [
+                {
+                    price: TEST_PRODUCT_PRICE_ID,
+                    quantity: 1
+                },
+            ],
+            imageBucket: bucket,
+            imageFilename: filename
+        });
+    
+        console.log("got checkout ID: ", id);
+        // Redirect to checkout
+        const stripe = await getStripe();
+        await stripe.redirectToCheckout({sessionId: id});
     }
 
 	return (
