@@ -5,6 +5,7 @@ import { Container, H2, P } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import NextLink from 'next/link';
+import {BuyNowButton} from '@ecwid/nextjs-ecwid-plugin';
 
 const GridWrapper = styled.div`
     margin-top: 4rem;
@@ -66,7 +67,11 @@ export default function ImageDetailPage({ id }) {
                             <H2>Purchase High Quality Photo</H2>
                             <P>Full resolution photos are available for instant download with purchase.<br/><br/>All photos are captured by Graham Bewley, a fellow cyclist and photographer. Happy trails! ✌</P>
 
-                            <P>{asset.filename}</P>
+                            <BuyNowButton
+                                storeId="84349616"
+                                productId="537476671"
+                                isShowPrice={false}
+                            />
                         </div>
                     </GridWrapper>
                 : null}
