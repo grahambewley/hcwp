@@ -14,7 +14,6 @@ const GridItem = styled.div`
     
 `;
 
-
 const CollectionImage = styled.img`
     width: 100%;
     height: 200px;

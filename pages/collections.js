@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import CollectionsGrid from '@/components/CollectionsGrid';
 import { Container } from '@/utils/sharedStyles';
 import client from '@/utils/client';
 import ShortBanner from '../components/ShortBanner';
-
 
 export default function Collections() {
 	const [collections, setCollections] = useState([]);

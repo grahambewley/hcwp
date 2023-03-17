@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import client from '@/utils/client';
-import { urlFor, urlForThumbnail } from '@/utils/image';
+import { urlFor } from '@/utils/image';
 import { Container, H2, P, Button } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
-import NextLink from 'next/link';
 import getStripe from '@/utils/getStripe';
 import axios from 'axios';
 

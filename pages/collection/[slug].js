@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import client from '@/utils/client';
-import { urlFor, urlForThumbnail } from '@/utils/image';
-import { Container, H1, H3, P, Button } from '@/utils/sharedStyles';
+import { urlForThumbnail } from '@/utils/image';
+import { Container } from '@/utils/sharedStyles';
 import Layout from '@/components/Layout';
 import styled from 'styled-components';
 import NextLink from 'next/link';
