@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import CollectionsGrid from '@/components/CollectionsGrid';
 import { useRouter } from 'next/router';
-import { Button, Container, H3 } from '@/utils/sharedStyles';
+import { Button, Container, Divider, H3 } from '@/utils/sharedStyles';
 import client from '@/utils/client';
 import styled from 'styled-components';
 import { Carter_One, Inter_Tight } from '@next/font/google';
@@ -74,6 +74,7 @@ export default function Home() {
 
 			<Container>
 				<H3>Latest Collections:</H3>
+				<Divider/>
 				<CollectionsGrid collections={latestCollections}/>
 			</Container>
 			

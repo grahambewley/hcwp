@@ -26,6 +26,13 @@ const P = styled.p`
 	font-family: ${inter.style.fontFamily};
 `;
 
+const Divider = styled.div`
+	height: 2px;
+	width: 100%;
+	background-color: rgba(0,0,0,.08);
+	margin: 1rem 0;
+`;
+
 const Container = styled.div`
 	width: 100%;
 	max-width: 1200px;
@@ -65,6 +72,7 @@ export {
 	H3, 
 	H4,
 	P,
+	Divider,
 	Container,
 	Button
 };
